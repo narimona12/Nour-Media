@@ -1,0 +1,7 @@
+{
+  "name": "NOUR MEDIA - Futuristic Digital Agency",
+  "description": "A minimalist, futuristic agency website for NOUR MEDIA, specializing in websites, automations, and sales funnels. Supporting English, Russian, and Uzbek languages.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
