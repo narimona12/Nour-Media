@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { translations } from './translations';
 import { Language } from './types';
 import LanguageSwitcher from './components/LanguageSwitcher';
@@ -7,10 +7,28 @@ import AIConsultant from './components/AIConsultant';
 
 const App: React.FC = () => {
   const [lang, setLang] = useState<Language>('en');
+  const [isReady, setIsReady] = useState(false);
   const t = translations[lang];
 
+  useEffect(() => {
+    // Simulate system check for futuristic feel and ensuring components are ready
+    const timer = setTimeout(() => setIsReady(true), 800);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!isReady) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center font-mono">
+        <div className="flex flex-col items-center">
+          <div className="w-12 h-12 border-2 border-white animate-spin mb-4"></div>
+          <div className="text-[10px] tracking-[0.5em] text-white">INITIALIZING_NOUR_MEDIA</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen selection:bg-white selection:text-black">
+    <div className="min-h-screen selection:bg-white selection:text-black animate-in fade-in duration-1000">
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-black/80 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
@@ -43,6 +61,9 @@ const App: React.FC = () => {
         </div>
         
         <div className="relative z-10 text-center max-w-5xl px-6">
+          <div className="inline-block px-3 py-1 border border-zinc-800 text-[10px] font-mono tracking-widest mb-6 animate-pulse">
+            SYSTEM_STATUS: ONLINE
+          </div>
           <h1 className="text-7xl md:text-9xl font-futuristic font-bold tracking-tighter mb-8 animate-in fade-in slide-in-from-bottom-10 duration-1000">
             {t.hero.title}
           </h1>
